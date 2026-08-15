@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mestre-yoda.dev/schemas/golden-path-plan.v1.schema.json",
+  "title": "Mestre Yoda Read-only Plan v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contractVersion",
+    "planId",
+    "profile",
+    "readOnly",
+    "effects",
+    "tasks",
+    "summary"
+  ],
+  "properties": {
+    "contractVersion": { "const": "1.0.0" },
+    "planId": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" },
+    "profile": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "digest"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "digest": { "type": "string", "pattern": "^sha256:[a-f0-9]{64}$" }
+      }
+    },
+    "readOnly": { "const": true },
+    "effects": { "type": "array", "maxItems": 0 },
+    "tasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "order",
+          "ruleId",
+          "severity",
+          "action",
+          "requiresHumanDecision"
+        ],
+        "properties": {
+          "order": { "type": "integer", "minimum": 1 },
+          "ruleId": { "type": "string", "minLength": 1 },
+          "severity": {
+            "enum": ["blocking", "required", "recommended"]
+          },
+          "action": { "type": "string", "minLength": 1 },
+          "requiresHumanDecision": { "type": "boolean" }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["taskCount", "blockingDecisions"],
+      "properties": {
+        "taskCount": { "type": "integer", "minimum": 0 },
+        "blockingDecisions": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

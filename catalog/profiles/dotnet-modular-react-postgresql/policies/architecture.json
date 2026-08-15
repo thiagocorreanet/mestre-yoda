@@ -1,0 +1,18 @@
+{
+  "id": "architecture",
+  "version": "1.0.0",
+  "title": "Modular architecture",
+  "decisions": [
+    "Start as a modular monolith and extract services only when metrics justify it.",
+    "Organize modules by business capability, not by global technical type.",
+    "Domain does not depend on Application, Infrastructure, or the HTTP layer.",
+    "Application depends on Domain and declares ports for external effects.",
+    "Infrastructure implements ports without leaking details into Domain.",
+    "Endpoints validate the protocol and delegate to use cases."
+  ],
+  "forbidden": [
+    "References from Domain to Infrastructure",
+    "Business rules inside controllers or React components",
+    "A database shared directly between modules without an application contract"
+  ]
+}

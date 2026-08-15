@@ -1,0 +1,19 @@
+{
+  "id": "database",
+  "version": "1.0.0",
+  "title": "PostgreSQL and persistence",
+  "decisions": [
+    "Use EF Core with Npgsql as the persistence standard.",
+    "Version migrations and run them as a controlled deployment step.",
+    "Give every module explicit ownership of its own tables.",
+    "Use short transactions with boundaries that match the use case.",
+    "Add indexes based on real queries and real metrics.",
+    "Enable PostGIS only for geospatial requirements.",
+    "Enable Row Level Security only after an explicit multi-tenancy decision."
+  ],
+  "migrationSafety": [
+    "Destructive changes require an expand-contract strategy.",
+    "A logical rollback must be documented before deployment.",
+    "Backfills must be observable, restartable, and bounded."
+  ]
+}

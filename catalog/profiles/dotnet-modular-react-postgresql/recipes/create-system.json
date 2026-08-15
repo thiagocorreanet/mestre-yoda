@@ -1,0 +1,37 @@
+{
+  "id": "create-system",
+  "version": "1.0.0",
+  "title": "Create a new system",
+  "intent": "Establish the minimum Golden Path structure without irreversible decisions.",
+  "inputs": [
+    "product name",
+    "first business module",
+    "OIDC provider",
+    "whether multi-tenancy is required",
+    "initial non-functional requirements"
+  ],
+  "steps": [
+    "Record the decisions and the boundaries of the first module.",
+    "Create the .NET 10 solution with an API project and business modules.",
+    "Separate Domain, Application, and Infrastructure inside each module.",
+    "Configure REST /api/v1, OpenAPI, Problem Details, and the correlation ID.",
+    "Configure JWT Bearer, policies, and default deny.",
+    "Configure EF Core, Npgsql, migrations, and health checks.",
+    "Create the React application, the typed client, and a minimal design system.",
+    "Add unit, integration, and architecture tests.",
+    "Configure the pipeline with every mandatory gate."
+  ],
+  "humanApprovals": [
+    "module boundaries",
+    "identity provider",
+    "multi-tenancy and Row Level Security",
+    "deployment strategy"
+  ],
+  "doneWhen": [
+    "the API and the frontend build",
+    "the initial migration is validated",
+    "health checks respond",
+    "OpenAPI is generated",
+    "the pipeline passes"
+  ]
+}

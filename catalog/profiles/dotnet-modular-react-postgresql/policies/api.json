@@ -1,0 +1,19 @@
+{
+  "id": "api",
+  "version": "1.0.0",
+  "title": "HTTP contract",
+  "decisions": [
+    "Use REST under /api/v1 for public commands and queries.",
+    "Publish OpenAPI as a verifiable contract.",
+    "Return Problem Details for HTTP errors.",
+    "Use pagination, filtering, and sorting with explicit limits.",
+    "Propagate a correlation ID across requests, logs, and integrations.",
+    "Use SignalR only for real-time notifications, never as a replacement for the command API."
+  ],
+  "responseConventions": {
+    "success": "An explicit DTO with a semantic HTTP status",
+    "error": "application/problem+json",
+    "validation": "Problem Details with per-field errors",
+    "idempotency": "Required for external commands that can be retried"
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "id": "add-database-migration",
+  "version": "1.0.0",
+  "title": "Add a PostgreSQL migration",
+  "inputs": [
+    "model change",
+    "estimated volume",
+    "compatibility between versions",
+    "rollback strategy"
+  ],
+  "steps": [
+    "Classify the change as additive, transformative, or destructive.",
+    "Apply expand-contract whenever versions would be incompatible.",
+    "Generate and review the EF Core migration.",
+    "Validate indexes, locks, and expected duration.",
+    "Run the migration against an ephemeral PostgreSQL in the pipeline.",
+    "Document the rollout, the observability, and the logical rollback."
+  ],
+  "humanApprovals": [
+    "destructive operations",
+    "long-held locks",
+    "backfills in production",
+    "enabling Row Level Security"
+  ],
+  "doneWhen": [
+    "the migration applies to a clean database",
+    "the upgrade from the previous state passes",
+    "old and new applications stay compatible during the rollout",
+    "the logical rollback is documented"
+  ]
+}

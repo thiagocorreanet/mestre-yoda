@@ -1,0 +1,19 @@
+{
+  "id": "security",
+  "version": "1.0.0",
+  "title": "Security by default",
+  "decisions": [
+    "Validate JWT Bearer tokens issued by a trusted OIDC provider.",
+    "Express authorization through policies tied to business capabilities.",
+    "Apply default deny and declare anonymous access explicitly.",
+    "Keep secrets out of the repository and make them rotatable.",
+    "Record security events without tokens, credentials, or sensitive data.",
+    "Run dependency scanning and static analysis in the pipeline."
+  ],
+  "requiredReview": [
+    "Changes to authentication or authorization",
+    "New public exposure",
+    "Handling of personal data",
+    "Adoption of multi-tenancy or Row Level Security"
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "frontend",
+  "version": "1.0.0",
+  "title": "React application",
+  "decisions": [
+    "Use React without Next.js.",
+    "Organize code by feature and keep a shared design system.",
+    "Consume generated or typed clients derived from OpenAPI.",
+    "Separate server state, local state, and form state.",
+    "Handle loading, empty, error, and success in every asynchronous journey.",
+    "Meet accessibility and responsiveness requirements starting from the base components."
+  ],
+  "quality": [
+    "TypeScript in strict mode",
+    "Lint and formatting in the pipeline",
+    "Tests for critical components",
+    "End-to-end tests for the main journeys"
+  ]
+}

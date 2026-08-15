@@ -1,0 +1,92 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://mestre-yoda.dev/schemas/golden-path-manifest.v1.schema.json",
+  "title": "Mestre Yoda Golden Path Manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contractVersion",
+    "id",
+    "name",
+    "version",
+    "description",
+    "stack",
+    "principles",
+    "policies",
+    "recipes",
+    "gates",
+    "rules"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "contractVersion": { "const": "1.0.0" },
+    "id": { "$ref": "#/$defs/identifier" },
+    "name": { "type": "string", "minLength": 1 },
+    "version": { "$ref": "#/$defs/semanticVersion" },
+    "description": { "type": "string", "minLength": 1 },
+    "stack": {
+      "type": "object",
+      "additionalProperties": { "type": "string", "minLength": 1 },
+      "minProperties": 1
+    },
+    "optionalCapabilities": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "uniqueItems": true
+    },
+    "principles": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1 },
+      "minItems": 1,
+      "uniqueItems": true
+    },
+    "policies": { "$ref": "#/$defs/references" },
+    "recipes": { "$ref": "#/$defs/references" },
+    "gates": { "$ref": "#/$defs/references" },
+    "rules": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "severity",
+          "description",
+          "signal",
+          "expected",
+          "remediation"
+        ],
+        "properties": {
+          "id": { "$ref": "#/$defs/identifier" },
+          "severity": {
+            "enum": ["blocking", "required", "recommended"]
+          },
+          "description": { "type": "string", "minLength": 1 },
+          "signal": { "type": "string", "minLength": 1 },
+          "expected": { "type": "boolean" },
+          "remediation": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "identifier": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$"
+    },
+    "semanticVersion": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "references": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "pattern": "^(policies|recipes|gates)/[a-z0-9-]+\\.json$"
+      },
+      "minItems": 1,
+      "uniqueItems": true
+    }
+  }
+}

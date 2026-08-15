@@ -1,0 +1,215 @@
+{
+  "$schema": "../../../schemas/golden-path-manifest.v1.schema.json",
+  "contractVersion": "1.0.0",
+  "id": "dotnet-modular-react-postgresql",
+  "name": ".NET Modular + React + PostgreSQL",
+  "version": "1.0.0",
+  "description": "Golden Path for ASP.NET Core .NET 10 APIs built as a modular monolith, with React applications and PostgreSQL.",
+  "stack": {
+    "backend": "ASP.NET Core .NET 10",
+    "frontend": "React",
+    "database": "PostgreSQL",
+    "architecture": "Modular monolith"
+  },
+  "optionalCapabilities": [
+    "SignalR",
+    "PostGIS",
+    "Row Level Security",
+    "Flutter",
+    "OIDC provider adapters"
+  ],
+  "principles": [
+    "Contracts before implementation",
+    "Modules driven by business capability",
+    "Security by default and least privilege",
+    "Observability from the first deployment",
+    "Automation that can be verified and reversed"
+  ],
+  "policies": [
+    "policies/architecture.json",
+    "policies/api.json",
+    "policies/security.json",
+    "policies/database.json",
+    "policies/frontend.json",
+    "policies/testing.json"
+  ],
+  "recipes": [
+    "recipes/create-system.json",
+    "recipes/add-api-module.json",
+    "recipes/add-react-feature.json",
+    "recipes/add-database-migration.json"
+  ],
+  "gates": [
+    "gates/default.json"
+  ],
+  "rules": [
+    {
+      "id": "stack.no-nestjs",
+      "severity": "blocking",
+      "description": "The backend does not use NestJS.",
+      "signal": "forbiddenNestAbsent",
+      "expected": true,
+      "remediation": "Remove NestJS dependencies and keep the backend on ASP.NET Core."
+    },
+    {
+      "id": "stack.no-nextjs",
+      "severity": "blocking",
+      "description": "The frontend does not use Next.js.",
+      "signal": "forbiddenNextAbsent",
+      "expected": true,
+      "remediation": "Remove Next.js and keep the frontend as a React application."
+    },
+    {
+      "id": "architecture.modular-dotnet",
+      "severity": "blocking",
+      "description": "The .NET solution separates Domain, Application, and Infrastructure.",
+      "signal": "modularDotnet",
+      "expected": true,
+      "remediation": "Organize the .NET solution into business modules with Domain, Application, and Infrastructure layers."
+    },
+    {
+      "id": "architecture.domain",
+      "severity": "required",
+      "description": "There is an independent Domain layer.",
+      "signal": "domainLayer",
+      "expected": true,
+      "remediation": "Create the Domain layer and keep business rules and models there, free of infrastructure dependencies."
+    },
+    {
+      "id": "architecture.application",
+      "severity": "required",
+      "description": "There is an Application layer for use cases.",
+      "signal": "applicationLayer",
+      "expected": true,
+      "remediation": "Create the Application layer and make use cases, commands, queries, and ports explicit."
+    },
+    {
+      "id": "architecture.infrastructure",
+      "severity": "required",
+      "description": "There is an Infrastructure layer for external adapters.",
+      "signal": "infrastructureLayer",
+      "expected": true,
+      "remediation": "Create the Infrastructure layer and keep persistence and external integrations there."
+    },
+    {
+      "id": "api.endpoints",
+      "severity": "required",
+      "description": "Controllers or endpoints form a thin HTTP layer.",
+      "signal": "endpointLayer",
+      "expected": true,
+      "remediation": "Create thin Controllers or Endpoints that delegate execution to use cases."
+    },
+    {
+      "id": "api.version-v1",
+      "severity": "blocking",
+      "description": "The public API uses the /api/v1 prefix.",
+      "signal": "apiVersioning",
+      "expected": true,
+      "remediation": "Version public routes under /api/v1 and document the evolution policy."
+    },
+    {
+      "id": "api.openapi",
+      "severity": "required",
+      "description": "The API publishes an OpenAPI contract.",
+      "signal": "openApi",
+      "expected": true,
+      "remediation": "Enable OpenAPI and validate the generated document in the pipeline."
+    },
+    {
+      "id": "api.problem-details",
+      "severity": "required",
+      "description": "HTTP errors follow Problem Details.",
+      "signal": "problemDetails",
+      "expected": true,
+      "remediation": "Standardize errors with RFC 9457 Problem Details and stable domain codes."
+    },
+    {
+      "id": "security.jwt",
+      "severity": "required",
+      "description": "The API authenticates JWT Bearer tokens issued by the OIDC provider.",
+      "signal": "jwtBearer",
+      "expected": true,
+      "remediation": "Configure JWT Bearer with validated issuer, audience, signature, and clock skew."
+    },
+    {
+      "id": "security.policies",
+      "severity": "required",
+      "description": "Authorization is expressed through policies.",
+      "signal": "authorizationPolicies",
+      "expected": true,
+      "remediation": "Define policies per business capability and apply them to the endpoints."
+    },
+    {
+      "id": "security.default-deny",
+      "severity": "blocking",
+      "description": "Authorization uses default deny.",
+      "signal": "defaultDeny",
+      "expected": true,
+      "remediation": "Set an authenticated FallbackPolicy and grant anonymous access only where it is declared."
+    },
+    {
+      "id": "database.postgresql-efcore",
+      "severity": "required",
+      "description": "Persistence uses PostgreSQL through the EF Core Npgsql provider.",
+      "signal": "postgresEfCore",
+      "expected": true,
+      "remediation": "Configure EF Core with Npgsql and keep data access inside Infrastructure."
+    },
+    {
+      "id": "database.migrations",
+      "severity": "required",
+      "description": "Database changes are versioned as migrations.",
+      "signal": "migrations",
+      "expected": true,
+      "remediation": "Add versioned migrations and validate them before deployment."
+    },
+    {
+      "id": "frontend.react",
+      "severity": "blocking",
+      "description": "The web interface uses React without Next.js.",
+      "signal": "reactWeb",
+      "expected": true,
+      "remediation": "Create a React application and organize features by domain."
+    },
+    {
+      "id": "quality.unit-tests",
+      "severity": "required",
+      "description": "Domain rules and use cases have unit tests.",
+      "signal": "unitTests",
+      "expected": true,
+      "remediation": "Add unit tests for domain rules and for critical use cases."
+    },
+    {
+      "id": "quality.integration-tests",
+      "severity": "required",
+      "description": "HTTP and PostgreSQL integrations have automated tests.",
+      "signal": "integrationTests",
+      "expected": true,
+      "remediation": "Add integration tests for the API and for PostgreSQL persistence."
+    },
+    {
+      "id": "quality.architecture-tests",
+      "severity": "recommended",
+      "description": "Dependencies between layers are protected by architecture tests.",
+      "signal": "architectureTests",
+      "expected": true,
+      "remediation": "Add architecture tests that prevent unwanted dependencies between layers."
+    },
+    {
+      "id": "operations.health-checks",
+      "severity": "required",
+      "description": "The application exposes operational health checks.",
+      "signal": "healthChecks",
+      "expected": true,
+      "remediation": "Configure liveness and readiness, including the PostgreSQL dependency."
+    },
+    {
+      "id": "operations.structured-logging",
+      "severity": "required",
+      "description": "Logs are structured and preserve correlation.",
+      "signal": "structuredLogging",
+      "expected": true,
+      "remediation": "Configure ILogger or Serilog with structured properties and a correlation ID."
+    }
+  ]
+}

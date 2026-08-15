@@ -1,0 +1,28 @@
+{
+  "name": "mestre-yoda",
+  "version": "0.1.0",
+  "description": "A declarative Golden Path provider for .NET, React, and PostgreSQL systems.",
+  "type": "module",
+  "license": "MIT",
+  "bin": {
+    "mestre-yoda": "bin/mestre-yoda.mjs"
+  },
+  "engines": {
+    "node": ">=24 <25"
+  },
+  "scripts": {
+    "mestre-yoda": "node bin/mestre-yoda.mjs",
+    "test": "node --test",
+    "check": "node scripts/verify.mjs",
+    "verify": "npm test && npm run check"
+  },
+  "files": [
+    "bin/",
+    "catalog/",
+    "docs/",
+    "schemas/",
+    "src/",
+    "LICENSE",
+    "README.md"
+  ]
+}

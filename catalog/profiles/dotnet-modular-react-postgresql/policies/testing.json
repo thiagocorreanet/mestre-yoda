@@ -1,0 +1,34 @@
+{
+  "id": "testing",
+  "version": "1.0.0",
+  "title": "Testing strategy",
+  "layers": [
+    {
+      "name": "unit",
+      "scope": "Domain and Application",
+      "purpose": "Fast, deterministic coverage of rules and use cases"
+    },
+    {
+      "name": "integration",
+      "scope": "HTTP, PostgreSQL, and adapters",
+      "purpose": "The real contracts at the system boundaries"
+    },
+    {
+      "name": "architecture",
+      "scope": "Dependencies between projects and namespaces",
+      "purpose": "Prevent erosion of the architecture"
+    },
+    {
+      "name": "end-to-end",
+      "scope": "Essential journeys",
+      "purpose": "Validate business value on the deployed system"
+    }
+  ],
+  "pipeline": [
+    "reproducible build",
+    "automated tests",
+    "OpenAPI validation",
+    "static and dependency analysis",
+    "migration verification"
+  ]
+}

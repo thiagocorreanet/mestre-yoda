@@ -1,0 +1,29 @@
+{
+  "id": "add-api-module",
+  "version": "1.0.0",
+  "title": "Add an API module",
+  "inputs": [
+    "business capability",
+    "use cases",
+    "entities and invariants",
+    "access policies",
+    "HTTP contracts"
+  ],
+  "steps": [
+    "Define the boundary, the vocabulary, and the ownership of the module.",
+    "Model the Domain without infrastructure dependencies.",
+    "Implement the use cases in Application, together with the ports they need.",
+    "Implement the adapters in Infrastructure.",
+    "Expose thin endpoints under /api/v1 and update OpenAPI.",
+    "Apply the authorization policies specific to this module.",
+    "Add unit, integration, and architecture tests.",
+    "Add telemetry and operational documentation."
+  ],
+  "doneWhen": [
+    "boundaries are verified by tests",
+    "errors use Problem Details",
+    "the OpenAPI contract stays compatible",
+    "authorization is default deny",
+    "the profile gates pass"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "add-react-feature",
+  "version": "1.0.0",
+  "title": "Add a React feature",
+  "inputs": [
+    "user journey",
+    "OpenAPI contracts consumed",
+    "permissions",
+    "interface states"
+  ],
+  "steps": [
+    "Define the journey and the accessibility criteria.",
+    "Create the feature without any Next.js dependency.",
+    "Consume the typed client derived from OpenAPI.",
+    "Implement the loading, empty, error, and success states.",
+    "Apply interface controls without replacing backend authorization.",
+    "Add component tests and a test for the critical journey."
+  ],
+  "doneWhen": [
+    "strict TypeScript passes",
+    "the journey is accessible and responsive",
+    "API errors are handled",
+    "the relevant tests pass"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "id": "default",
+  "version": "1.0.0",
+  "title": "Mandatory pipeline gates",
+  "pullRequest": [
+    "formatting and lint",
+    ".NET and React build",
+    "unit tests",
+    "integration tests",
+    "architecture tests",
+    "OpenAPI contract validation",
+    "static and dependency analysis",
+    "migration validation"
+  ],
+  "deployment": [
+    "an immutable artifact identified by commit",
+    "configuration and secrets supplied externally",
+    "the migration executed as a controlled step",
+    "readiness approved before receiving traffic",
+    "telemetry and alerts active"
+  ],
+  "releaseEvidence": [
+    "commit and version",
+    "test results",
+    "OpenAPI digest",
+    "migrations applied",
+    "required approvals",
+    "rollback plan"
+  ]
+}
